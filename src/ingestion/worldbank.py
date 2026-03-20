@@ -35,8 +35,9 @@ def ingest_worldbank():
         if response.status_code != 200:
             raise Exception(f"World Bank fetch failed for {indicator_name}: {response.text}")
         
-        # Convert response to JSON string for uploading
-        data = json.dumps(response.json())
+        # Convert the list of records to a newline-delimited JSON string for uploading
+        records = response.json()[1]
+        data = "\n".join(json.dumps(record) for record in records)
 
         # Generate destination path with current date and indicator name
         destination_path = f"worldbank/raw/{indicator_name}/{today}.json"

@@ -51,8 +51,9 @@ def ingest_acled():
     if response.status_code != 200:
         raise Exception(f"ACLED data fetch failed: {response.text}")
     
-    # Convert response to JSON string for uploading
-    data = json.dumps(response.json())
+    # Convert the list of records to a newline-delimited JSON string for uploading
+    records = response.json()["data"]
+    data = "\n".join(json.dumps(record) for record in records)
 
     # Generate destination path with current date
     today = datetime.utcnow().strftime("%Y-%m-%d")
