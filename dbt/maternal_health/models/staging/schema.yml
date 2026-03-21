@@ -1,0 +1,109 @@
+version: 2
+
+sources:
+  - name: raw
+    database: maternal-health-pipeline
+    schema: raw
+    tables:
+      - name: acled
+      - name: worldbank_health_expenditure
+      - name: worldbank_oop_expenditure
+      - name: worldbank_population
+      - name: dhs_ir_2018
+      - name: dhs_br_2018
+      - name: dhs_ir_2024
+      - name: dhs_br_2024
+      - name: dhs_nr_2024
+
+models:
+  - name: stg_acled_conflict
+    columns: 
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+      - name: state_name
+        tests:
+          - not_null
+      - name: event_date
+        tests:
+          - not_null
+      - name: fatalities
+        tests:
+          - not_null
+
+  - name: stg_worldbank
+    columns:
+      - name: year
+        tests:
+          - unique
+          - not_null
+      - name: country_code
+        tests:
+          - not_null
+      - name: population
+        tests:
+          - not_null
+
+  - name: stg_dhs_ir
+    columns:
+      - name: unique_id
+        tests:
+          - unique
+          - not_null
+      - name: case_id
+        tests:
+          - not_null
+      - name: survey_year
+        tests:
+          - not_null
+      - name: state_code
+        tests:
+          - not_null
+      - name: sample_weight
+        tests:
+          - not_null
+
+  - name: stg_dhs_br
+    columns:
+      - name: unique_id
+        tests:
+          - unique
+          - not_null
+      - name: case_id
+        tests:
+          - not_null
+      - name: survey_year
+        tests:
+          - not_null
+      - name: state_code
+        tests:
+          - not_null
+      - name: sample_weight
+        tests:
+          - not_null
+      - name: birth_index
+        tests:
+          - not_null
+
+  - name: stg_dhs_nr
+    columns:
+      - name: unique_id
+        tests:
+          - unique
+          - not_null
+      - name: case_id
+        tests:
+          - not_null
+      - name: survey_year
+        tests:
+          - not_null
+      - name: state_code
+        tests:
+          - not_null
+      - name: sample_weight
+        tests:
+          - not_null
+      - name: pregnancy_index
+        tests:
+          - not_null
