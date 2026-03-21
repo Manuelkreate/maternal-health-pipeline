@@ -23,23 +23,26 @@ IR_COLUMNS = [
     'caseid', 'v000', 'v001', 'v002', 'v003', 'v005',
     'v012', 'v024', 'v025', 'v190', 'v501', 'v481',
     'm14_1', 'm15_1', 'm3a_1', 'm3b_1', 'm3c_1',
-    'm57a_1', 'm57b_1', 'm70_1', 'm72_1',
-    'sstate'
+    'm57a_1', 'm57b_1', 'm70_1', 'm72_1', 'mm1_01', 
+    'mm1_02', 'mm1_03', 'mm1_04', 'mm1_05', 'mm2_01',
+    'mm2_02', 'mm2_03', 'mm2_04', 'mm2_05', 'mm7_01',
+    'mm7_02', 'mm7_03', 'mm7_04', 'mm7_05', 'mm9_01',
+    'mm9_02', 'mm9_03', 'mm9_04', 'mm9_05', 'mm15_01',
+    'mm15_02', 'mm15_03', 'mm15_04', 'mm15_05',
+    'sstate', 'szone'
 ]
 
 BR_COLUMNS = [
     'caseid', 'v000', 'v001', 'v002', 'v003', 'v005',
-    'v024', 'v025',
-    'bidx_01', 'bord_01', 'b4_01', 'b5_01', 'b7_01',
-    'sstate'
+    'v024', 'v025','bidx','bord','b2','b4','b5','b6',
+    'b7','b11', 'sstate'
 ]
 
 NR_COLUMNS = [
-    'caseid', 'v000', 'v001', 'v002', 'v003', 'v005',
-    'v024', 'v025',
-    'm14_1', 'm15_1', 'm3a_1', 'm3b_1', 'm3c_1',
-    'm70_1', 'm72_1',
-    'sstate'
+    'caseid', 'v000', 'v001', 'v005',
+    'v024', 'v025','pidx', 'm1','m14',
+    'm15','m3a','m3b','m3c','m57a', 
+    'm57b','m70','m72','sstate', 'szone'
 ]
 # Map file types to their respective columns for filtering
 COLUMN_MAP = {
