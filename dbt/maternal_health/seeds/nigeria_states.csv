@@ -1,0 +1,38 @@
+state_code_2018,state_code_2024,state_name,geopolitical_zone
+10,1,Sokoto,north_west
+20,2,Zamfara,north_west
+30,3,Katsina,north_west
+40,4,Jigawa,north_west
+50,5,Yobe,north_east
+60,6,Borno,north_east
+70,7,Adamawa,north_east
+80,8,Gombe,north_east
+90,9,Bauchi,north_east
+100,10,Kano,north_west
+110,11,Kaduna,north_west
+120,12,Kebbi,north_west
+130,13,Niger,north_central
+140,14,Federal Capital Territory,north_central
+150,15,Nassarawa,north_central
+160,16,Plateau,north_central
+170,17,Taraba,north_east
+180,18,Benue,north_central
+190,19,Kogi,north_central
+200,20,Kwara,north_central
+210,21,Oyo,south_west
+220,22,Osun,south_west
+230,23,Ekiti,south_west
+240,24,Ondo,south_west
+250,25,Edo,south_south
+260,26,Anambra,south_east
+270,27,Enugu,south_east
+280,28,Ebonyi,south_east
+290,29,Cross River,south_south
+300,30,Akwa Ibom,south_south
+310,31,Abia,south_east
+320,32,Imo,south_east
+330,33,Rivers,south_south
+340,34,Bayelsa,south_south
+350,35,Delta,south_south
+360,36,Lagos,south_west
+370,37,Ogun,south_west
