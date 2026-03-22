@@ -49,7 +49,7 @@ aggregated AS (
         SUM(CASE WHEN antenatal_care_visits >= 1 AND delivery_attendant_doctor = 0 AND delivery_attendant_cs_1 = 0 AND delivery_attendant_cs_2 = 0 THEN sample_weight ELSE 0 END)
             / NULLIF(SUM(CASE WHEN antenatal_care_visits >= 1 THEN sample_weight ELSE 0 END)
             , 0)                                                AS pct_anc_attended_no_skilled_delivery,
-        SUM(sample_weight)                                      AS total_weight,
+        SUM(sample_weight)                                      AS total_respondents_weighted,
         COUNT(*)                                                AS respondent_count
     FROM base
     GROUP BY state_name, survey_year, zone
