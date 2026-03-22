@@ -29,6 +29,8 @@ def ingest_acled():
     if token_response.status_code != 200:
         raise Exception(f"ACLED authentication failed: {token_response.text}") 
     
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+
     # Extract access token from response
     access_token = token_response.json()["access_token"]
     print(f"Token received: {access_token[:20]}...")
@@ -43,7 +45,10 @@ def ingest_acled():
         params={
             "country": "Nigeria",
             "fields": "event_id_cnty|disorder_type|event_date|event_type|sub_event_type|actor1|inter1|actor2|inter2|admin1|admin2|location|latitude|longitude|fatalities|year",
-            "_format": "json"
+            "_format": "json",
+            "event_date": f"2015-01-01|{today}",
+            "event_date_where": "BETWEEN",
+            "limit": 50000
         }
     )
 

@@ -10,6 +10,10 @@ From int_anc_vs_delivery:
 * North-South divide is stark — Kebbi has 5.4% facility delivery and 92.8% of ANC attendees still deliver without skilled help
 * Gombe has 73.6% of ANC attendees delivering without skilled help — worst continuity-of-care gap
 
+From int_conflict_intensity:
+
+* Kebbi shows near-zero conflict activity but has the worst facility delivery rate (5.4%) and highest ANC-to-no-skilled-delivery gap (92.8%) nationally. Conflict does not explain Kebbi's outcomes — points to infrastructure, distance, cultural, or economic barriers. This project cannot determine which. Flag as key anomaly.
+
 General:
 
 * geopolitical_zone is null for all 2018 rows — derived from seed table instead of source data

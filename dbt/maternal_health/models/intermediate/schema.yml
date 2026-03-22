@@ -9,11 +9,21 @@ models:
       - name: survey_year
         tests:
           - not_null
+
   - name: int_neonatal_mortality
     columns:
       - name: state_name
         tests:
           - not_null
       - name: survey_year
+        tests:
+          - not_null
+          
+  - name: int_conflict_intensity
+    columns:
+      - name: state_name
+        tests:
+          - not_null
+      - name: event_year
         tests:
           - not_null
