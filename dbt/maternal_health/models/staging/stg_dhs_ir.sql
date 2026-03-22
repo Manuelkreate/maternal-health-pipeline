@@ -48,7 +48,7 @@ renamed AS (
         v024                            AS region,
         v025                            AS urban_rural,
         v001                            AS cluster_num,
-        CAST(v005 AS FLOAT64)             AS sample_weight,
+        CAST(v005 AS FLOAT64) /1000000  AS sample_weight,
         CAST(v012 AS INTEGER)           AS womans_age,
         v501                            AS marital_status,
         v190                            AS wealth_index,

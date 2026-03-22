@@ -13,7 +13,7 @@ renamed AS (
         2024                            AS survey_year,
         TRIM(CAST(caseid AS STRING))    AS case_id,
         v001                            AS cluster_num,
-        CAST(v005 AS FLOAT64)           AS sample_weight,
+        CAST(v005 AS FLOAT64) /1000000  AS sample_weight,
         sstate                          AS state_code,
         szone                           AS geopolitical_zone,
         v024                            AS region,

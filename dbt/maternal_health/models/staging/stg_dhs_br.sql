@@ -32,7 +32,7 @@ renamed AS (
         TRIM(CAST(caseid AS STRING))    AS case_id,
         sstate                          AS state_code,
         v001                            AS cluster_num,
-        CAST(v005 AS FLOAT64)           AS sample_weight,
+        CAST(v005 AS FLOAT64)/1000000   AS sample_weight,
         v024                            AS region,
         v025                            AS urban_rural,
         bidx                            AS birth_index,
