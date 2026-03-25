@@ -2,7 +2,7 @@ WITH br AS (
     SELECT 
         caseid, v000, v001, v002, v003, v005,
         v024, v025, sstate,
-        bidx, bord, b2, b4, b5, b6, b7, b11    
+        bidx, bord, b2, b4, b5, b6, b7, b11, m14, m15, m3a, m3b, m3c    
     FROM {{ source('raw', 'dhs_br_2018')}}
 
     UNION ALL
@@ -10,7 +10,7 @@ WITH br AS (
     SELECT 
         caseid, v000, v001, v002, v003, v005,
         v024, v025, sstate,
-        bidx, bord, b2, b4, b5, b6, b7, b11    
+        bidx, bord, b2, b4, b5, b6, b7, b11, m14, m15, m3a, m3b, m3c     
     FROM {{ source('raw', 'dhs_br_2024')}}
 ),
 
@@ -37,6 +37,11 @@ renamed AS (
         v025                            AS urban_rural,
         bidx                            AS birth_index,
         bord                            AS birth_order_num,
+        CAST(m14 AS INTEGER)          AS antenatal_care_visits,
+        CAST(m15 AS INTEGER)          AS place_of_delivery,        
+        CAST(m3a AS INTEGER)          AS delivery_attendant_doctor,
+        CAST(m3b AS INTEGER)          AS delivery_attendant_cs_1,
+        CAST(m3c AS INTEGER)          AS delivery_attendant_cs_2,        
         b2                              AS year_of_birth,
         b4                              AS sex_of_child,
         b5                              AS child_alive,

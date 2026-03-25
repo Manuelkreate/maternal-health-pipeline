@@ -35,7 +35,7 @@ IR_COLUMNS = [
 BR_COLUMNS = [
     'caseid', 'v000', 'v001', 'v002', 'v003', 'v005',
     'v024', 'v025','bidx','bord','b2','b4','b5','b6',
-    'b7','b11', 'sstate'
+    'b7','b11', 'sstate', 'm14', 'm15', 'm3a', 'm3b', 'm3c'
 ]
 
 NR_COLUMNS = [
