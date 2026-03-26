@@ -21,9 +21,11 @@ General:
 
 
 Weighted score composition:
+
+Metrics are weighted based on consequences to mortality
 | **Metric** | **Suggested Weight**|
 |-----------|----------|
-| MR delta | 25% |
+| MR delta | 25% (should carry the most weight as it has the highest consequence)|
 | Facility delivery delta | 20% |
 | Skilled birth attendant delta | 15% |
 | ANC 4+ visits delta | 15% |
@@ -31,7 +33,7 @@ Weighted score composition:
 | Home delivery no skilled attendant delta | 10% |
 | MMR proxy delta | 5% |
 | Doctor at delivery delta | 0% (already captured in skilled attendant) |
-| ANC attended but delivered home delta | 0% (overlaps with above) |
+| ANC attended but delivered home delta | 0% (doesn't really impact anything unless it involves skilled/unskilled attendants) |
 
 
 Methodology:
