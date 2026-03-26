@@ -18,3 +18,21 @@ General:
 
 * geopolitical_zone is null for all 2018 rows — derived from seed table instead of source data
 * Nassarawa spelling inconsistency between ACLED ("Nassarawa") and standard spelling ("Nasarawa") — using ACLED's version for join consistency
+
+
+Weighted score composition:
+| **Metric** | **Suggested Weight**|
+|-----------|----------|
+| MR delta | 25% |
+| Facility delivery delta | 20% |
+| Skilled birth attendant delta | 15% |
+| ANC 4+ visits delta | 15% |
+| ANC but no skilled delivery delta | 10% |
+| Home delivery no skilled attendant delta | 10% |
+| MMR proxy delta | 5% |
+| Doctor at delivery delta | 0% (already captured in skilled attendant) |
+| ANC attended but delivered home delta | 0% (overlaps with above) |
+
+
+Methodology:
+* Rankings reflect improvement between survey periods, not absolute performance. A state ranking highly may still have poor absolute outcomes. Cross-reference with mart_state_health_profile for absolute figures.
