@@ -6,16 +6,18 @@ from datetime import datetime
 from src.utils import upload_to_gcs
 
 # DHS file registry for years and file types
+BASE = os.getenv("DHS_BASE_PATH", r"C:\Users\USER\Documents\DHS-data")
+
 DHS_FILE_REGISTRY = {
     2018: {
-        "ir": r"C:\Users\USER\Documents\DHS-data\2018\NGIR7BDT\NGIR7BFL.DTA",
-        "br": r"C:\Users\USER\Documents\DHS-data\2018\NGBR7BDT\NGBR7BFL.DTA",
+        "ir": os.path.join(BASE, "2018", "NGIR7BDT", "NGIR7BFL.DTA"),
+        "br": os.path.join(BASE, "2018", "NGBR7BDT", "NGBR7BFL.DTA"),
     },
     2024: {
-        "ir": r"C:\Users\USER\Documents\DHS-data\2024\NGIR8BDT\NGIR8BFL.dta",
-        "br": r"C:\Users\USER\Documents\DHS-data\2024\NGBR8BDT\NGBR8BFL.dta",
-        "nr": r"C:\Users\USER\Documents\DHS-data\2024\NGNR8BDT\NGNR8BFL.dta",
-    }    
+        "ir": os.path.join(BASE, "2024", "NGIR8BDT", "NGIR8BFL.dta"),
+        "br": os.path.join(BASE, "2024", "NGBR8BDT", "NGBR8BFL.dta"),
+        "nr": os.path.join(BASE, "2024", "NGNR8BDT", "NGNR8BFL.dta"),
+    }
 }
 
 # Column mappings for each DHS file type
