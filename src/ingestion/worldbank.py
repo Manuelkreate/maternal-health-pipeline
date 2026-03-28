@@ -26,7 +26,7 @@ def ingest_worldbank():
             f"{base_url}/{indicator_code}",
             params={
                 "format": "json",
-                "date": f"2015:{current_year}",
+                "date": f"2013:{current_year}",
                 "per_page": 100
             }
         )

@@ -29,3 +29,12 @@ models:
       - name: state_name
         tests:
           - not_null
+
+  - name: mart_nigeria_health_spending
+    columns:
+      - name: year
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null          
