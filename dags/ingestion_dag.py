@@ -7,9 +7,9 @@ from src.ingestion.dhs import ingest_dhs
 from src.ingestion.worldbank import ingest_worldbank
 from load_to_bigquery import main as load_to_bigquery
 # import airflow modules
-from airflow.models import DAG
-from airflow.operators.python import PythonOperator
-from airflow.operators.trigger_dagrun import TriggerDagRunOperator
+from airflow.models import DAG #type: ignore
+from airflow.operators.python import PythonOperator #type: ignore
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator #type: ignore
 from datetime import datetime
 
 default_args = {
