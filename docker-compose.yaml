@@ -83,7 +83,10 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/src:/opt/airflow/src
     - ${AIRFLOW_PROJ_DIR:-.}/load_to_bigquery.py:/opt/airflow/load_to_bigquery.py
-    - C:\Users\USER\Documents\DHS-data:/opt/airflow/dhs-data    
+    - C:\Users\USER\Documents\DHS-data:/opt/airflow/dhs-data 
+    - ${AIRFLOW_PROJ_DIR:-.}/dbt:/opt/airflow/dbt
+    - C:\Users\USER\Documents\gcp-keys:/opt/airflow/gcp-keys
+    - C:\Users\USER\.dbt:/home/airflow/.dbt   
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
