@@ -15,9 +15,9 @@ WITH base AS (
         ir.anc_location_home,
         ir.anc_location_other_home,
         s.state_name,
-        s.geopolitical_zone AS zone
+        s.zone
     FROM {{ ref('stg_dhs_ir') }} ir
-    LEFT JOIN {{ ref('nigeria_states') }} s
+    LEFT JOIN {{ ref('dim_state') }} s
         ON (ir.survey_year = 2018 AND ir.state_code = s.state_code_2018)
         OR (ir.survey_year = 2024 AND ir.state_code = s.state_code_2024)    
 ),

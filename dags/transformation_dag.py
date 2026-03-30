@@ -26,7 +26,7 @@ with DAG(
 
     dbt_run = BashOperator(
         task_id='dbt_run',
-        bash_command='dbt run --project-dir /opt/airflow/dbt/maternal_health --profiles-dir /home/airflow/.dbt',    
+        bash_command='dbt clean --project-dir /opt/airflow/dbt/maternal_health && dbt deps --project-dir /opt/airflow/dbt/maternal_health --profiles-dir /home/airflow/.dbt && dbt run --project-dir /opt/airflow/dbt/maternal_health --profiles-dir /home/airflow/.dbt',    
     )
 
     dbt_test = BashOperator(

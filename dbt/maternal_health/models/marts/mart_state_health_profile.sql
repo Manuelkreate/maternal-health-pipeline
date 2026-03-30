@@ -8,7 +8,7 @@ SELECT
     ROUND(a.pct_doctor_at_delivery * 100, 2) AS pct_doctor_at_delivery,
     ROUND(a.pct_anc_attended_no_skilled_delivery * 100, 2) AS pct_anc_attended_no_skilled_delivery, 
     ROUND(a.pct_home_delivery_no_skilled_attendant * 100, 2) AS pct_home_delivery_no_skilled_attendant,
-    a.total_weight AS total_respondents_weighted, 
+    a.total_respondents_weighted, 
     b.neonatal_mortality_rate, 
     b.neonatal_deaths, 
     b.total_births_weighted, 

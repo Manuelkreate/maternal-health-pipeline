@@ -11,9 +11,9 @@ WITH base AS (
         br.child_alive,
         br.age_of_death_in_completed_months,
         s.state_name,
-        s.geopolitical_zone AS zone    
+        s.zone    
     FROM {{ ref('stg_dhs_br') }} br
-    LEFT JOIN {{ ref('nigeria_states') }} s
+    LEFT JOIN {{ ref('dim_state') }} s
         ON (br.survey_year = 2018 AND br.state_code = s.state_code_2018)
         OR (br.survey_year = 2024 AND br.state_code = s.state_code_2024)  
 ),
