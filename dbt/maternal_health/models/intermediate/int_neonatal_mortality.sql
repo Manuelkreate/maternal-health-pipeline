@@ -41,7 +41,7 @@ maternal_base AS(
         ir.sibling_sex_4, ir.sibling_alive_4, ir.sibling_preg_related_death_4,
         ir.sibling_sex_5, ir.sibling_alive_5, ir.sibling_preg_related_death_5,
         s.state_name,
-        s.geopolitical_zone AS zone
+        s.zone
     FROM {{ ref('stg_dhs_ir') }} ir
     LEFT JOIN {{ ref('dim_state') }} s
         ON (ir.survey_year = 2018 AND ir.state_code = s.state_code_2018)
