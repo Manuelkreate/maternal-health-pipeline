@@ -1,6 +1,8 @@
 import os
 from google.cloud import bigquery
 from google.oauth2 import service_account #type: ignore
+from dotenv import load_dotenv #type: ignore
+load_dotenv()
 
 # config
 CREDENTIALS_PATH = os.getenv(
