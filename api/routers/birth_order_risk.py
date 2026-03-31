@@ -68,6 +68,12 @@ async def get_birth_order_risk(
                 bigquery.ScalarQueryParameter('zone', 'STRING', zone)
             )  
 
+        if reliability_flag:
+            sql += ' AND reliability_flag = @reliability_flag'
+            query_parameters.append(
+                bigquery.ScalarQueryParameter('reliability_flag', 'STRING', reliability_flag)
+            ) 
+
         # job conig
         job_config = bigquery.QueryJobConfig(query_parameters=query_parameters)
 
