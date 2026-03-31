@@ -5,6 +5,7 @@ from api.routers import health_profiles
 from api.routers import health_spending
 from api.routers import state_rankings
 from api.routers import wealth_delivery
+from api.routers import birth_order_risk
 
 app = FastAPI(title="Nigeria Maternal Health API")
 
@@ -19,6 +20,8 @@ app.include_router(health_spending.router, tags=['Country Expenditure'])
 app.include_router(state_rankings.router, tags=['State Health'])
 
 app.include_router(wealth_delivery.router, tags=['State Health'])
+
+app.include_router(birth_order_risk.router, tags=['State Health'])
 
 @app.get('/')
 async def root():
