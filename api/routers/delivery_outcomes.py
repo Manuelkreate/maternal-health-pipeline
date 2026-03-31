@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_DELIVERY_CATEGORIES, VALID_ATTENDANT_CATEGORIES, VALID_ANC_ADEQUACY)
 client = get_bigquery_client()
 
 # initialize router
@@ -21,9 +22,41 @@ async def get_delivery_outcomes(
     anc_adequacy: Optional[str] = Query(default=None, description='Filter by anc_adequacy') 
 ):
     """
-    Queries BigQuery for state names, optionally filtering by survey year, zone, place of delivery, birth attendant, and anc adequacy
+    Queries BigQuery for delivery outcomes data, optionally filtering by state name, survey year, zone, place of delivery, birth attendant, and anc adequacy
     """
     try:
+        # validation
+
+        if survey_year and survey_year not in VALID_SURVEY_YEARS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid survey_year. Valid values: {VALID_SURVEY_YEARS}"
+            ) 
+
+        if zone and zone not in VALID_ZONES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid zone. Valid values: {VALID_ZONES}"
+            )
+
+        if place_of_delivery_category and place_of_delivery_category not in VALID_DELIVERY_CATEGORIES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid place_of_delivery_category. Valid values: {VALID_DELIVERY_CATEGORIES}"
+            )
+        
+        if birth_attendant_category and birth_attendant_category not in VALID_ATTENDANT_CATEGORIES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid birth_attendant_category. Valid values: {VALID_ATTENDANT_CATEGORIES}"
+            )
+
+        if anc_adequacy and anc_adequacy not in VALID_ANC_ADEQUACY:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid anc_adequacy. Valid values: {VALID_ANC_ADEQUACY}"
+            )
+                                           
         # sql query
         sql = f'SELECT * FROM `{VIEW_ID}` WHERE 1=1'
 

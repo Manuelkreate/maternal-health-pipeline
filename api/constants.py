@@ -1,0 +1,7 @@
+VALID_SURVEY_YEARS = [2018, 2024]
+VALID_ZONES = ['north_central', 'north_east', 'north_west', 'south_east', 'south_south', 'south_west']
+VALID_DELIVERY_CATEGORIES = ['facility_delivery', 'home_delivery', 'unknown']
+VALID_ATTENDANT_CATEGORIES = ['skilled', 'unskilled']
+VALID_ANC_ADEQUACY = ['no_anc', 'inadequate_anc', 'adequate_anc', 'unknown']
+VALID_WEALTH_INDEX = ['poorest', 'poorer', 'middle', 'richer', 'richest']
+VALID_SURVEY_PERIODS = ['2013-2018', '2019-2024']

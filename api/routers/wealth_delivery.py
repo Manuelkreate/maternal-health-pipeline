@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_WEALTH_INDEX)
+
 client = get_bigquery_client()
 
 # initialize router
@@ -19,9 +21,29 @@ async def get_wealth_delivery(
     wealth_index: Optional[str] = Query(default=None, description='Filter by wealth_index')
 ):
     """
-    Queries BigQuery for state names, optionally filtering by survey year, zone, and wealth index
+    Queries BigQuery for wealth vs delivery data, optionally filtering by state names, survey year, zone, and wealth index
     """
     try:
+        # validation
+
+        if survey_year and survey_year not in VALID_SURVEY_YEARS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid survey_year. Valid values: {VALID_SURVEY_YEARS}"
+            ) 
+
+        if zone and zone not in VALID_ZONES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid zone. Valid values: {VALID_ZONES}"
+            )
+        
+        if wealth_index and wealth_index not in VALID_WEALTH_INDEX:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid wealth_index. Valid values: {VALID_WEALTH_INDEX}"
+            )  
+                      
         # sql query
         sql = f'SELECT * FROM `{VIEW_ID}` WHERE 1=1'
 

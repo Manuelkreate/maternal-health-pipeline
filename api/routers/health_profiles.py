@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES)
+
 client = get_bigquery_client()
 
 # initialize router
@@ -18,9 +20,23 @@ async def get_health_profiles(
     zone: Optional[str] = Query(default=None, description='Filter by zone'), 
 ):
     """
-    Queries BigQuery for state names, optionally filtering by survey year and zone
+    Queries BigQuery for state health profiles data, optionally filtering by state names, survey year and zone
     """
     try:
+        # validation
+
+        if survey_year and survey_year not in VALID_SURVEY_YEARS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid survey_year. Valid values: {VALID_SURVEY_YEARS}"
+            ) 
+
+        if zone and zone not in VALID_ZONES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid zone. Valid values: {VALID_ZONES}"
+            )
+                
         # sql query
         sql = f'SELECT * FROM `{TABLE_ID}` WHERE 1=1'
 

@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
+from api.constants import VALID_SURVEY_PERIODS
 client = get_bigquery_client()
 
 # initialize router
@@ -16,9 +17,17 @@ async def get_health_spending(
     survey_period: Optional[str] = Query(default=None, description='Filter by survey_period')
 ):
     """
-    Queries BigQuery for Nigeria's years of health spending, optionally the survey_period
+    Queries BigQuery for Nigeria's years of health spending data, optionally filtering by the survey_period
     """
     try:
+        # validation
+
+        if survey_period and survey_period not in VALID_SURVEY_PERIODS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid survey_period. Valid values: {VALID_SURVEY_PERIODS}"
+            )     
+            
         # sql query
         sql = f'SELECT * FROM `{TABLE_ID}` WHERE 1=1'
 
