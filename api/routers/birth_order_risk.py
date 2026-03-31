@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
-from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES)
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_RELIABILITY_FLAGS)
 client = get_bigquery_client()
 
 # initialize router
@@ -17,9 +17,11 @@ async def get_birth_order_risk(
     state_name: Optional[str] = Query(default=None, description='Filter by state_name'),
     survey_year: Optional[int] = Query(default=None, description='Filter by survey_year'),
     zone: Optional[str] = Query(default=None, description='Filter by zone'), 
+    reliability_flag: Optional[str] = Query(default=None, description='Filter by reliability_flag'), 
+    
 ):
     """
-    Queries BigQuery for birth order risk data, optionally filtering by state names, survey year and zone
+    Queries BigQuery for birth order risk data, optionally filtering by state names, survey year, zone and reliability_flag
     """
     try:
         # validation
@@ -35,7 +37,13 @@ async def get_birth_order_risk(
                 status_code=422,
                 detail=f"Invalid zone. Valid values: {VALID_ZONES}"
             )
-                            
+
+        if reliability_flag and reliability_flag not in VALID_RELIABILITY_FLAGS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid reliability_flag. Valid values: {VALID_RELIABILITY_FLAGS}"
+            )
+                                           
         # sql query
         sql = f'SELECT * FROM `{TABLE_ID}` WHERE 1=1'
 
