@@ -42,6 +42,11 @@ final AS (
         total_births_weighted,
         neonatal_deaths,
         birth_record_count,
+        CASE 
+            WHEN birth_record_count >= 50 THEN 'reliable'
+            WHEN birth_record_count >= 25 THEN 'stable'
+            ELSE 'unreliable'
+        END AS reliability_flag
     FROM aggregated 
 )
 
