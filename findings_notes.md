@@ -38,3 +38,5 @@ Metrics are weighted based on consequences to mortality
 
 Methodology:
 * Rankings reflect improvement between survey periods, not absolute performance. A state ranking highly may still have poor absolute outcomes. Cross-reference with mart_state_health_profile for absolute figures.
+* NMR figures are DHS survey-derived state-level weighted averages and may differ from modelled national estimates.
+* Cells with fewer than 25 birth records excluded due to statistical instability in birth_order_neonatal and delivery_outcomes models

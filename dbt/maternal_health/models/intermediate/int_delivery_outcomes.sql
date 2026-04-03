@@ -44,9 +44,20 @@ aggregated AS (
         SUM(sample_weight)                                      AS total_births_weighted,
         SUM(CASE WHEN child_alive = 0 AND age_of_death_in_completed_months = 0 
             THEN sample_weight ELSE 0 END)                      AS neonatal_deaths,
-        COUNT(*)                                                AS birth_record_count
+        COUNT(*)                                                AS birth_record_count     
     FROM base
     GROUP BY state_name, survey_year, zone, place_of_delivery_category, birth_attendant_category, anc_adequacy
+),
+
+final AS (
+    SELECT 
+        *,
+        CASE 
+            WHEN birth_record_count >= 50 THEN 'stable'
+            WHEN birth_record_count >= 25 THEN 'reliable'
+            ELSE 'unreliable'
+        END AS reliability_flag 
+    FROM aggregated  
 )
 
-SELECT * FROM aggregated
+SELECT * FROM final

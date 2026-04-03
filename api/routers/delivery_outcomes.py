@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
-from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_DELIVERY_CATEGORIES, VALID_ATTENDANT_CATEGORIES, VALID_ANC_ADEQUACY)
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_DELIVERY_CATEGORIES, VALID_ATTENDANT_CATEGORIES, VALID_ANC_ADEQUACY, VALID_RELIABILITY_FLAGS)
 client = get_bigquery_client()
 
 # initialize router
@@ -19,7 +19,9 @@ async def get_delivery_outcomes(
     zone: Optional[str] = Query(default=None, description='Filter by zone'),
     place_of_delivery_category: Optional[str] = Query(default=None, description='Filter by place_of_delivery'),	
     birth_attendant_category: Optional[str] = Query(default=None, description='Filter by birth_attendant_category'),	
-    anc_adequacy: Optional[str] = Query(default=None, description='Filter by anc_adequacy') 
+    anc_adequacy: Optional[str] = Query(default=None, description='Filter by anc_adequacy'),
+    reliability_flag: Optional[str] = Query(default=None, description='Filter by reliability_flag'), 
+     
 ):
     """
     Queries BigQuery for delivery outcomes data, optionally filtering by state name, survey year, zone, place of delivery, birth attendant, and anc adequacy
@@ -56,7 +58,13 @@ async def get_delivery_outcomes(
                 status_code=422,
                 detail=f"Invalid anc_adequacy. Valid values: {VALID_ANC_ADEQUACY}"
             )
-                                           
+        
+        if reliability_flag and reliability_flag not in VALID_RELIABILITY_FLAGS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid reliability_flag. Valid values: {VALID_RELIABILITY_FLAGS}"
+            )    
+                                               
         # sql query
         sql = f'SELECT * FROM `{VIEW_ID}` WHERE 1=1'
 
@@ -99,6 +107,12 @@ async def get_delivery_outcomes(
                 bigquery.ScalarQueryParameter('anc_adequacy', 'STRING', anc_adequacy)
             )
 
+        if reliability_flag:
+            sql += ' AND reliability_flag = @reliability_flag'
+            query_parameters.append(
+                bigquery.ScalarQueryParameter('reliability_flag', 'STRING', reliability_flag)
+            ) 
+            
         # job conig
         job_config = bigquery.QueryJobConfig(query_parameters=query_parameters)
 
