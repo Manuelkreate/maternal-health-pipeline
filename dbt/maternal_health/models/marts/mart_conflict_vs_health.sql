@@ -51,7 +51,8 @@ final AS (
         c.neonatal_mortality_rate, 
         c.neonatal_deaths, 
         c.maternal_mortality_ratio_proxy, 
-        c.maternal_deaths_proxy      
+        c.maternal_deaths_proxy,
+        b.total_respondents_weighted      
     FROM aggregated a
     LEFT JOIN {{ ref('int_anc_vs_delivery')}} b
         ON a.state_name = b.state_name AND a.survey_year = b.survey_year
