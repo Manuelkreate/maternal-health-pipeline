@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Query #type: ignore
 from google.cloud import bigquery
 from typing import Optional
 from api.bigquery import get_bigquery_client
-from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_WEALTH_INDEX)
+from api.constants import (VALID_SURVEY_YEARS, VALID_ZONES, VALID_WEALTH_INDEX, VALID_RELIABILITY_FLAGS)
 
 client = get_bigquery_client()
 
@@ -18,7 +18,8 @@ async def get_wealth_delivery(
     state_name: Optional[str] = Query(default=None, description='Filter by state_name'),
     survey_year: Optional[int] = Query(default=None, description='Filter by survey_year'),
     zone: Optional[str] = Query(default=None, description='Filter by zone'),
-    wealth_index: Optional[str] = Query(default=None, description='Filter by wealth_index')
+    wealth_index: Optional[str] = Query(default=None, description='Filter by wealth_index'),
+    reliability_flag: Optional[str] = Query(default=None, description='Filter by reliability_flag'),
 ):
     """
     Queries BigQuery for wealth vs delivery data, optionally filtering by state names, survey year, zone, and wealth index
@@ -43,7 +44,13 @@ async def get_wealth_delivery(
                 status_code=422,
                 detail=f"Invalid wealth_index. Valid values: {VALID_WEALTH_INDEX}"
             )  
-                      
+
+        if reliability_flag and reliability_flag not in VALID_RELIABILITY_FLAGS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid reliability_flag. Valid values: {VALID_RELIABILITY_FLAGS}"
+            )    
+                       
         # sql query
         sql = f'SELECT * FROM `{VIEW_ID}` WHERE 1=1'
 
@@ -74,6 +81,12 @@ async def get_wealth_delivery(
                 bigquery.ScalarQueryParameter('wealth_index', 'STRING', wealth_index)
             )
 
+        if reliability_flag:
+            sql += ' AND reliability_flag = @reliability_flag'
+            query_parameters.append(
+                bigquery.ScalarQueryParameter('reliability_flag', 'STRING', reliability_flag)
+            ) 
+  
         # job conig
         job_config = bigquery.QueryJobConfig(query_parameters=query_parameters)
 

@@ -39,4 +39,14 @@ Metrics are weighted based on consequences to mortality
 Methodology:
 * Rankings reflect improvement between survey periods, not absolute performance. A state ranking highly may still have poor absolute outcomes. Cross-reference with mart_state_health_profile for absolute figures.
 * NMR figures are DHS survey-derived state-level weighted averages and may differ from modelled national estimates.
-* Cells with fewer than 25 birth records excluded due to statistical instability in birth_order_neonatal and delivery_outcomes models
+* Relibility flag included in delivery_outcomes and birth_order_neonatal models to allow filtering of unreliable birth counts.
+
+
+Findings from visuals:
+* Facility delivery NMR exceeding home delivery NMR Consistent across ANC adequacy categories. Most plausible explanation is emergency referral bias — women arriving at facilities without prior ANC are disproportionately high-risk presentations, not typical planned facility births. This is a hypothesis; the data shows the pattern but cannot confirm the mechanism.
+* Imo State's NMR rose from ~25 to 47 per 1,000 despite a facility delivery rate above 29%. One of the sharpest single-state deteriorations in the dataset. Suggests facility access alone did not translate to better outcomes — possible care quality or staffing issue worth investigating.
+* No ANC / Facility Delivery cell for 2024. This combination drops out after the reliability filter, meaning too few women reported arriving at a facility with zero prior ANC visits to produce a stable rate. Could reflect genuine improvement in ANC uptake by 2024, or a sampling effect. Either way, the 2018 figure (facility + no ANC = highest NMR in the dataset) stands as the baseline.
+* First matrix, and Imo stands out immediately. Adequate ANC, yet 49.82 NMR. Other states like Kebbi (44.42%), Kaduna (43.46), Bauchi (40.93), Adamawa (40.41) *may* be explained with conflict, thankfully we're going to do the visuals too. There are also states with higher NMR with adequate ANC than no_ANC. 
+* There's no data for Imo for No ANC, so i can't tell, but even it's adequate anc has a higher NMR than inadequate ANC. Adequate ANC attendance in Imo is not translating to survival. The question is whether women are attending ANC but delivering without skilled attendance, or whether facility quality in Imo specifically is the issue. The birth attendant matrix will shed light on that.
+* A state like Bauchi has 40.93 for adequate, 27.11 for inadequate. Jigawa also stands out. it's really weird. Other states that are tilting this data.
+The broader pattern is that adequate ANC not guaranteeing low NMR in multiple northern states and directly supports the hypothesis that ANC quality varies by state. Attendance is being captured, but what happens at those visits may differ significantly between north and south.
