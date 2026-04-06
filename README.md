@@ -110,7 +110,7 @@ documented as a finding about Nigeria's data infrastructure, not a project limit
 
 The full analytical write-up — findings per research question, engineering 
 decisions, limitations, and recommendations — is available in 
-[`assets/report/`](assets/Maternal_Health_Pipeline_Report/).
+[`assets/report/`](assets/Maternal_Health_Pipeline_Report.pdf/).
 
 ---
 
