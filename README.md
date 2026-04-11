@@ -76,6 +76,8 @@ North-East.
 ---
 
 ## Project Structure
+
+```text
 maternal-health-pipeline/
 ├── assets/
 │   ├── screenshots/        # Dashboard page screenshots
@@ -87,7 +89,7 @@ maternal-health-pipeline/
 ├── api/                    # FastAPI endpoints
 ├── seeds/                  # dim_state and dim_survey_period
 └── findings_notes.md       # Key decisions and rationale
-
+```
 ---
 
 ## Key Engineering Decisions
